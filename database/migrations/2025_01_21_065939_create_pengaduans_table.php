@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('masyarakat_id');
+            $table->foreignId('masyarakat_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('kategori_id')->constrained('kategories')->onDelete('cascade');
             $table->date('tanggal_pengaduan');
-            $table->unsignedBigInteger('kategori_id');
             $table->text('isi_pengaduan');
-            $table->string('foto');
-            $table->string('tgl_pengaduan');
-            $table->enum('status',['new','proses','selesai','ditolak']);
-            $table->timestamps(); 
+            $table->string('foto')->nullable(); 
+            $table->enum('status', ['0', 'diproses', 'selesai'])->nullable();
+            $table->timestamps();
         });
     }
 
