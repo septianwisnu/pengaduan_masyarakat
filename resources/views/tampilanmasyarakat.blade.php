@@ -11,7 +11,7 @@
   <div class="container position-relative">
 
     <div class="welcome position-relative text-center" data-aos="fade-down" data-aos-delay="100">
-      <h2>SELAMAT DATANG DI <span style="color: var(--accent-color);">SUARA REJASARI</span></h2>
+      <h2>SELAMAT DATANG DI <span style="color: var(--main-color);">SUARA REJASARI</span></h2>
       <p>"Laporkan keluhan anda untuk membangun desa<br>
         lebih baik. <strong>Suara anda</strong>, perubahan untuk kita semua."</p>
     </div><!-- End Welcome -->
@@ -24,7 +24,7 @@
             Rejasari dalam menyampaikan keluhan dan aspirasinya.
           </p>
           <div class="text-center">
-            <a href="#about" class="more-btn"><span>Bergabung Sekarang</span> <i class="bi bi-chevron-right"></i></a>
+            <a href="{{ route('register') }}" class="more-btn"><span>Bergabung Sekarang</span> <i class="bi bi-chevron-right"></i></a>
           </div>
         </div>
       </div><!-- End Why Box -->
@@ -92,7 +92,7 @@
     </section><!-- /About Section -->
 
     <!-- Stats Section -->
-<section id="stats" class="stats section light-background">
+<section id="stats" class="stats section ">
   <div class="container" data-aos="fade-up" data-aos-delay="100">
 
     <div class="row gy-4 d-flex justify-content-center"> <!-- Pusatkan semua item -->
@@ -201,7 +201,7 @@
 
 
   <!-- Reporting Guide Section -->
-<section id="panduan-melapor" class="py-5 bg-light">
+<section id="panduan-melapor" class="py-5 ">
   <div class="container">
     <!-- Section Title -->
     <div class="section-title text-center mb-4">

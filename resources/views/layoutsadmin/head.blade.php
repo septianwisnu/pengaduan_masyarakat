@@ -1,38 +1,26 @@
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>SUARA REJASARI</title>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"/>
-    <!-- Favicons -->
+<meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SUARA REJASARI</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
   <link href="{{asset('assets/img/logo_kota_banjar.png" rel="icon') }}">
   <link href="{{asset('assets/img/logo_kota_banjar.png')}}" rel="icon">
 
-    <!-- Fonts and icons -->
-    <script src="assetsadmin/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["assetsadmin/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
-
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{asset('assetsadmin/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assetsadmin/css/plugins.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assetsadmin/css/kaiadmin.min.css')}}" />
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{asset('assetsadmin/css/demo.css')}}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  
+  <!-- AdminLTE Theme -->
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>

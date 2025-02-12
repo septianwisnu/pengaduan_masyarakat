@@ -8,12 +8,14 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --background-color: #D9D9D9; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #2c4964; /* Color for headings, subheadings and title throughout the website */
+  --heading-color: #2E5077; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #1977cc; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --main-color: #2E5077; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --green-color: #5CB338;
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -36,7 +38,7 @@
 .dark-background {
   --background-color: #060606;
   --default-color: #ffffff;
-  --heading-color: #ffffff;
+  --heading-color: #110f0f;
   --surface-color: #252525;
   --contrast-color: #ffffff;
 }
@@ -53,6 +55,10 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
 a {
@@ -214,7 +220,7 @@ h6 {
   color: var(--default-color);
   transition: all 0.5s;
   z-index: 997;
-  background-color: var(--background-color);
+  background-color: var(--main-color);
 }
 
 .header .topbar {
@@ -283,8 +289,10 @@ h6 {
   font-size: 15px;
   margin: 0;
   font-weight: 700;
-  color: var(--heading-color);
+  color: var(--surface-color);
+  
 }
+
 
 .header .cta-btn,
 .header .cta-btn:focus {
@@ -300,7 +308,7 @@ h6 {
 .header .cta-btn:hover,
 .header .cta-btn:focus:hover {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  background: color-mix(in srgb, var(--nav-dropdown-hover-color), transparent 15%);
 }
 
 @media (max-width: 1200px) {
@@ -361,7 +369,7 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: var(--surface-color);
     font-size: 15px;
     padding: 0 2px;
     font-family: var(--nav-font);
@@ -501,7 +509,7 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;
-    font-family: var(--nav-font);
+    font-family: var(--surface-color);
     font-size: 17px;
     font-weight: 500;
     display: flex;
@@ -598,6 +606,8 @@ h6 {
   background-color: #2f4862;
   color: #ffffff;
   padding: 20px 0;
+  margin-top: auto;
+    width: 100%;
 }
 
 .footer-top {
@@ -809,6 +819,7 @@ section,
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
+  color:var(--main-color)
 }
 
 .section-title h2:before {
@@ -909,7 +920,7 @@ section,
 
 .hero .content .why-box .more-btn {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--contrast-color), transparent 80%);
+  background: color-mix(in srgb, var(--green-color), transparent 10%);
   display: inline-block;
   padding: 6px 30px 8px 30px;
   border-radius: 50px;
@@ -957,6 +968,7 @@ section,
 .about .content h3 {
   font-size: 2rem;
   font-weight: 700;
+  color : var(--main-color)
 }
 
 .about .content ul {
@@ -1005,7 +1017,9 @@ section,
   align-items: center;
   flex-wrap: wrap; /* Agar tetap responsif */
   gap: 15px; /* Jarak antar kotak */
+
 }
+
 
 .stats i {
   color: var(--contrast-color);
@@ -1144,6 +1158,7 @@ section,
 .testimonials .info h3 {
   font-weight: 700;
   font-size: 32px;
+  color:var(--main-color)
 }
 
 .testimonials .swiper {
@@ -1352,3 +1367,130 @@ section,
 }
 
 
+/* Dashboard Masyarakat setelah login */
+
+.masyarakat-container {
+  max-width:100vh;
+  margin: auto;
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.masyarakat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.masyarakat-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.masyarakat-btn-create {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.masyarakat-btn-create:hover {
+  background: #218838;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.masyarakat-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.masyarakat-table th, .masyarakat-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.masyarakat-table th {
+  background: #28a745;
+  color: white;
+  font-weight: bold;
+}
+
+.masyarakat-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.masyarakat-btn-action {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.masyarakat-btn-action:hover {
+  background: #0056b3;
+}
+
+
+/* Style untuk buat pengaduan */
+.card-pengaduan {
+  margin-top: 30px;
+  box-shadow: 0 4px 8px rgba(134, 21, 21, 0.1);
+  border-radius: 10px;
+}
+
+/* Style untuk form-control dan file input */
+.form-control-pengaduan, .form-control-file-pengaduan {
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Style untuk button */
+.btn-pengaduan {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+/* Style untuk textarea */
+.textarea-pengaduan {
+  resize: vertical;
+}
+
+/* Style untuk label */
+.label-pengaduan {
+  font-weight: bold;
+}
+
+/* Style untuk header card */
+.card-header-pengaduan h4 {
+  font-size: 24px;
+  color:var(--main-color);
+}
+
+/* Style untuk button kembali */
+.btn-secondary-pengaduan {
+  background-color: #6c757d;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 15px;
+}
+
+/* Style untuk button save */
+.btn-save-pengaduan {
+  width: 100%;
+  font-size: 18px;
+}

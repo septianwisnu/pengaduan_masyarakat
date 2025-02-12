@@ -2,21 +2,24 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kategories;
 use Illuminate\Database\Seeder;
+use App\Models\Kategori; // Nama model yang benar (bukan Kategories)
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Tambahkan data kategori
+        Kategories::create([
+            'nama_kategori' => 'Umum',
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Kategories::create([
+            'nama_kategori' => 'Pelanggaran',
+        ]);
     }
 }
