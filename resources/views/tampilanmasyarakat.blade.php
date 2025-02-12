@@ -92,7 +92,7 @@
     </section><!-- /About Section -->
 
     <!-- Stats Section -->
-<section id="stats" class="stats section light-background">
+<section id="stats" class="stats section ">
   <div class="container" data-aos="fade-up" data-aos-delay="100">
 
     <div class="row gy-4 d-flex justify-content-center"> <!-- Pusatkan semua item -->
@@ -201,7 +201,7 @@
 
 
   <!-- Reporting Guide Section -->
-<section id="panduan-melapor" class="py-5 bg-light">
+<section id="panduan-melapor" class="py-5 ">
   <div class="container">
     <!-- Section Title -->
     <div class="section-title text-center mb-4">

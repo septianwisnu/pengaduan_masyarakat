@@ -41,12 +41,17 @@ class AuthController extends Controller
              $user = Auth::user();
              switch ($user->role) {
                  case 'admin':
-                     return redirect('/index');
+                     return redirect('/tampilanadmin');
                  case 'petugas':
                      return redirect('/index');
-                 default:
-                     return redirect('/dashboard_masyarakat');
-             }
+                     case 'masyarakat':
+                         {
+                            return Auth::check() ? redirect('/dashboardmasyarakat') : view('welcome');
+                        }
+                        
+                    default:
+                        return redirect()->route('home');
+                }
          }
  
  
@@ -114,7 +119,6 @@ class AuthController extends Controller
 ]);
 
         
-        //Membuat user baru
        // Membuat user baru
     User::create([
         'nik'           => $request->nik,
@@ -137,7 +141,7 @@ public function logout(Request $request)
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return redirect('/login');
+    return redirect('/');
 }
 
 

@@ -18,22 +18,24 @@
     margin-top: 5px;
   }
     body {
-      margin: 0;
+      margin: ;
       font-family: Arial, sans-serif;
       background-color: #2E5077;
       display: flex;
+      padding: 20px;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      
     }
 
     .container {
-      background-color: white;
-      width: 650px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+  background-color: white;
+  width: 650px;
+  border-radius: 10px;
+  margin: 50px auto; /* Menambah jarak atas dan bawah */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
     .logo {
       width: 80px;

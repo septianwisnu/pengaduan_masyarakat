@@ -13,8 +13,8 @@
       </div>
 
 
-    <div class="footer mt-4">
-      <footer class="footer light-background">
+    <div class="footer ">
+      <footer class="footer">
         <div class="container footer-top">
           <div class="row align-items-center">
             <!-- Logo dan Informasi -->

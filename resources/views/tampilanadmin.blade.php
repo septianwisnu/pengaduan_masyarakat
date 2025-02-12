@@ -1,170 +1,169 @@
-@extends("layoutsadmin.app")
-@section("main")
+@extends('layoutsadmin.app')
 
-<div class="container">
-    <div class="page-inner">
-      <div
-        class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-      
-        <div>
-          <h3 class="fw-bold mb-3">Dashboard</h3>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Data Petugas -->
-        <div class="col-sm-6 col-md-3">
-          <div class="card card-stats card-round">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-icon">
-                  <div class="icon-big text-center icon-primary bubble-shadow-small">
-                    <i class="bi bi-columns-gap"></i>
-                  </div>
+@section('main')
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Dashboard</h1>
+                    </div>
                 </div>
-                <div class="col col-stats ms-3 ms-sm-0">
-                  <div class="numbers">
-                    <p class="card-category">Data Petugas</p>
-                    <h4 class="card-title">1,294</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Laporan Masuk -->
-        <div class="col-sm-6 col-md-3">
-          <div class="card card-stats card-round">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-icon">
-                  <div class="icon-big text-center icon-info bubble-shadow-small">
-                    <i class="fas fa-user-check"></i>
-                  </div>
-                </div>
-                <div class="col col-stats ms-3 ms-sm-0">
-                  <div class="numbers">
-                    <p class="card-category">Laporan Masuk</p>
-                    <h4 class="card-title">1,303</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Jumlah Diproses -->
-        <div class="col-sm-6 col-md-3">
-          <div class="card card-stats card-round">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-icon">
-                  <div class="icon-big text-center icon-success bubble-shadow-small">
-                    <i class="fas fa-luggage-cart"></i>
-                  </div>
-                </div>
-                <div class="col col-stats ms-3 ms-sm-0">
-                  <div class="numbers">
-                    <p class="card-category">Jumlah Diproses</p>
-                    <h4 class="card-title">1,345</h4> <!-- Hapus tanda `$` -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Laporan Pengaduan -->
-        <div class="col-sm-6 col-md-3">
-          <div class="card card-stats card-round">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="col-icon">
-                  <div class="icon-big text-center icon-danger bubble-shadow-small">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </div>
-                </div>
-                <div class="col col-stats ms-3 ms-sm-0">
-                  <div class="numbers">
-                    <p class="card-category">Laporan Pengaduan</p>
-                    <h4 class="card-title">576</h4> <!-- Hapus tanda `$` -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+            </div><!-- /.container-fluid -->
+        </section>
 
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Data Laporan Masuk</title>
-          <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-          <style>
-              .action-button {
-                  background-color: #FFC107;
-                  border: none;
-                  padding: 5px 10px;
-                  border-radius: 4px;
-                  cursor: pointer;
-              }
-      
-              .action-button i {
-                  color: white;
-              }
-          </style>
-      </head>
-      <body>
-      
-          <div style="margin: 20px;">
-              <h3>Data Laporan Masuk</h3>
-              <table id="dataLaporan" class="display" style="width:100%">
-                  <thead>
-                      <tr>
-                          <th>No</th>
-                          <th>Tgl Pengaduan</th>
-                          <th>Judul Pengaduan</th>
-                          <th>Kategori</th>
-                          <th>Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td>25-02-2025</td>
-                          <td>Trafic Light Jatuh</td>
-                          <td>Fasilitas Umum</td>
-                          <td>
-                              <button class="action-button">
-                                  <i class="fas fa-ellipsis-h"></i>
-                              </button>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-      
-          <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-          <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-          <script>
-              $(document).ready(function () {
-                  $('#dataLaporan').DataTable({
-                      "paging": true,
-                      "searching": true,
-                      "info": true,
-                      "lengthChange": true
-                  });
-              });
-          </script>
-      
-      </body>
-      </html>
-      
+                            <div class="info-box-content">
+                                <span class="info-box-text">Masyarakat</span>
+                                <span class="info-box-number">
+                                    10
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-book"></i></span>
 
+                            <div class="info-box-content">
+                                <span class="info-box-text">Kategori Pengaduan</span>
+                                <span class="info-box-number">
+                                    10
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-red elevation-1"><i class="fa fa-retweet"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Laporan Pengaduan</span>
+                                <span class="info-box-number">
+                                    1.000
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-green elevation-1"><i class="fa fa-envelope"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Laporan Baru</span>
+                                <span class="info-box-number">
+                                    200
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Data Laporan Masuk
+                            </div>
+
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tgl Pengaduan</th>
+                                            <th>Judul Pengaduan</th>
+                                            <th>Kategori</th>
+                                            <th>Foto</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($pengaduans as $index => $pengaduan)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $pengaduan->kategori->nama_kategori ?? 'Tidak Ada Data' }}</td>
+                                    <td>{{ $pengaduan->tanggal_pengaduan }}</td>
+                                    <td>{{ $pengaduan->isi_pengaduan }}</td>
+                                    <td>
+                                        @if ($pengaduan->foto)
+                                            <img src="{{ Storage::url($pengaduan->foto) }}" alt="Foto Pengaduan" width="100">
+                                        @else
+                                            Tidak ada foto
+                                        @endif
+                                    </td>
+                            
+                            
+                                    <td>
+                                        @if(in_array($pengaduan->status, ['selesai', 'ditolak']))
+                                        @if($pengaduan->status == 'ditolak' && auth()->user()->role == 'admin')
+                                            <a href="/tambah_tanggapan/{{$pengaduan->id}}">
+                                                <span class="badge bg-danger">
+                                                    {{ ucfirst($pengaduan->status) }}
+                                                </span>
+                                            </a>
+                                        @else
+                                            <span class="badge {{ $pengaduan->status == 'selesai' ? 'bg-success' : 'bg-danger' }}">
+                                                {{ ucfirst($pengaduan->status) }}
+                                            </span>
+                                        @endif
+                                    @elseif($pengaduan->status == 'diproses' && auth()->user()->role == 'admin')
+                                        <a href="/tambah_tanggapan/{{$pengaduan->id}}">
+                                            <span class="badge bg-info">
+                                                {{ ucfirst($pengaduan->status) }}
+                                            </span>
+                                        </a>
+                                    @else
+                                        {{-- Default status tanpa respons --}}
+                                        <a href="/tambah_tanggapan/{{$pengaduan->id}}">
+                                            <span class="badge bg-warning">
+                                                belum ada respon
+                                            </span>
+                                        </a>
+        
+                                    @endif
+        
+        
+                                    </td>
+                            
+                                    @if(auth()->user()->role !== 'masyarakat')
+                                        <td>
+                                            <a href="" class="btn btn-warning btn-sm">c</a>
+                                            <a href="/edit_pengaduan/{{$pengaduan->id}}"class="btn btn-sm btn-info mt-1">E</a>
+                                            <form action="" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus pengaduan ini?')">H</button>
+                                            </form>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 @endsection

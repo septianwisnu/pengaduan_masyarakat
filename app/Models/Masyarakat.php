@@ -9,7 +9,7 @@ class Masyarakat extends Model
 {
     use HasFactory;
 
-    protected $table = 'masyarakats';
+    protected $table = 'users';
 
     protected $fillable = [
         'nik',
@@ -22,6 +22,6 @@ class Masyarakat extends Model
         'role',
     ];
 
-
+    }
     
-}
+

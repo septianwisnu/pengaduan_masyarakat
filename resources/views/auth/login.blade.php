@@ -14,7 +14,7 @@
 <body>
     <div class="login-container">
         <img src="{{ asset('assets/img/logo_kota_banjar.png') }}" alt="logo">
-        <h2>Login</h2>
+        <h2>Login Ke Akun Anda</h2>
 
         @if (session('error'))
             <p style="color: red;">{{ session('error') }}</p>
@@ -112,8 +112,7 @@
     }
 
     button {
-        background-color: #007bff;
-        /* Warna biru */
+        background-color: #2e5c93;
         color: white;
         border: none;
         border-radius: 5px;

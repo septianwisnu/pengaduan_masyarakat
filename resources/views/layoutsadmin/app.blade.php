@@ -9,11 +9,6 @@
     <div class="main-panel">
             @include('layoutsadmin.navbar')
 
-            <div class="container">
-          <div class="page-inner">
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-              <div>
         @yield('main')
         </div>
         </div>
@@ -22,14 +17,21 @@
 
 
     </div>
-    <footer class="footer">
-      <div class="container-fluid d-flex justify-content-center">
-        <div class="copyright">
-          @Copyright UKK RPL 2025 All rights Reserved
-        </div>
-      </div>
-    </footer>
-    
+   <!-- resources/views/layouts/footer.blade.php -->
+
+   <footer class="main-footer">
+    <strong>Copyright &copy; 2025 By UKK RPL 2025.</strong> All rights reserved.
+  </footer>
+  
+  <style>
+    .main-footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #f8f9fa; /* Warna background bisa disesuaikan */
+      font-size: 14px;
+    }
+  </style>
+  
     </div>
     </div>
     @include('layoutsadmin.footer')

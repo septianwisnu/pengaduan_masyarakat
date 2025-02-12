@@ -1,82 +1,96 @@
-<div class="sidebar" data-background-color="dark">
-    <div class="sidebar-logo">
-        <!-- Logo Header -->
-        <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
-                <img src="assetsadmin/img/kaiadmin/logo_kota_banjar.png" alt="navbar brand" class="navbar-brand"
-                    height="20" />
-                <span class="text-white p-1">SUARA REJASARI</span>
-            </a>
-            <div class="nav-toggle">
-                <button class="btn btn-toggle toggle-sidebar">
-                    <i class="gg-menu-right"></i>
-                </button>
-                <button class="btn btn-toggle sidenav-toggler">
-                    <i class="gg-menu-left"></i>
-                </button>
-            </div>
-            <button class="topbar-toggler more">
-                <i class="gg-more-vertical-alt"></i>
-            </button>
-        </div>
-        <!-- End Logo Header -->
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4 custom-sidebar">
+    <!-- Brand Logo -->
+    <div class="brand-logo-container d-flex align-items-center justify-content-center py-3">
+        <img src="{{ asset('assets/img/logo_kota_banjar.png') }}" 
+             alt="Logo Kota Banjar" 
+             class="brand-logo img-circle elevation-3" 
+             style="height: 50px; width: auto; margin-right: 10px;">
+        <span class="brand-text text-white custom-brand-text">
+            SUARA <br> REJASARI
+        </span>
     </div>
-    <div class="sidebar-wrapper scrollbar scrollbar-inner">
-        <div class="sidebar-content">
-            <ul class="nav nav-secondary">
-                <!-- Menu Dashboard -->
-                <ul class="nav">
-                  <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                      <a href="/" class="nav-link">
-                          <i class="fas fa-home"></i>
-                          <p>Dashboard</p>
-                      </a>
-                  </li>
-                </ul>              
+    
+    <style>
+      .custom-brand-text {
+          font-weight: bold;
+          font-size: 1.3rem; /* Bisa disesuaikan */
+          text-align: left;
+      }
+    </style>
+    
+    
 
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a href="/">
-                        <i class="fa fa-user-friends"></i>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav>
+            <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+                <li class="nav-header">Menu</li>
+                <li class="nav-item">
+                    <a href="/tampilanadmin" class="nav-link {{ request()->is('tampilanadmin') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/masyarakat" class="nav-link {{ request()->is('masyarakat') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>Masyarakat</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a href="/">
-                        <i class="fas fa-user"></i>
+                <li class="nav-item">
+                    <a href="/pegawai" class="nav-link {{ request()->is('pegawai') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user"></i>
                         <p>Pegawai</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a href="/">
-                        <i class="fa fa-building"></i>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
                         <p>Kategori Pengaduan</p>
                     </a>
                 </li>
 
-                <p class="nav-item container mt-4" style="color: #bbb; font-weight: bold; padding-left: 20px;">Laporan
-                </p>
-
-                <!-- Laporan Section -->
-                <li class="nav-item {{ Request::is('components/*') ? 'active' : '' }}">
-                    <a data-bs-toggle="collapse" href="#base"
-                        aria-expanded="{{ Request::is('keamanan') || Request::is('components/*') ? 'true' : 'false' }}"
-                        data-parent="#sidebar-menu">
-                        <i class="fa fa-envelope"></i>
+                <li class="nav-header">Laporan</li>
+                <li class="nav-item">
+                    <a href="/detail_pengaduan" class="nav-link {{ request()->is('laporanmasuk') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-envelope"></i>
                         <p>Laporan Masuk</p>
                     </a>
-                    <p class="nav-item container mt-4" style="color: #bbb; font-weight: bold; padding-left: 20px;">
-                        Export</p>
+                </li>
+                <li class="nav-item">
+                    <a href="/tambah_tanggapan/{id}" class="nav-link {{ request()->is('datatanggapan') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p>Tanggapan</p>
+                    </a>
+                </li>
 
-                    <!-- Export Section -->
-                    <a data-bs-toggle="collapse" href="#base"
-                        aria-expanded="{{ Request::is('keamanan') || Request::is('components/*') ? 'true' : 'false' }}"
-                        data-parent="#sidebar-menu">
-                        <i class="fa fa-print"></i>
+                <li class="nav-header">Export</li>
+                <li class="nav-item">
+                    <a href="/generate" class="nav-link {{ request()->is('generate') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-print"></i>
                         <p>Generate Laporan</p>
                     </a>
-
                 </li>
             </ul>
-        </div>
+        </nav>
     </div>
-</div>
+    <!-- /.sidebar -->
+    
+    <!-- Logout Section -->
+    <div class="logout-section text-center py-3">
+        <form action="/logout" method="POST" style="display: inline;">
+            @csrf
+            <button class="btn btn-secondary btn-md" type="submit">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </div>
+</aside>
+
+<style>
+    .custom-sidebar {
+        background-color: #2E5077 !important;
+    }
+</style>
