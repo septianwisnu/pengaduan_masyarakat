@@ -16,7 +16,7 @@ class MasyarakatController extends Controller
 {
     public function index()
 {
-    // Ambil hanya pengaduan milik user masyarakat yang sedang login
+    // mengambil pengaduan milik user masyarakat yang sedang login
     $pengaduans = Pengaduan::where('masyarakat_id', Auth::id())->get();
     return view('dashboardmasyarakat.tampilandashboardmasyarakat', compact('pengaduans'));
 }
@@ -37,7 +37,7 @@ class MasyarakatController extends Controller
     }
 
    
-    // Menampilkan daftar masyarakat
+    // Menampilkan data masyarakat
     public function datamasyarakat()
     {
         // Ambil semua data dengan role 'masyarakat'
@@ -48,7 +48,7 @@ class MasyarakatController extends Controller
     }
 
     // Menyimpan data masyarakat baru ke database
-    public function store(Request $request)
+    public function storemasyarakat(Request $request)
     {
         $request->validate([
             'nik' => 'required|unique:users|max:16',
@@ -70,7 +70,7 @@ class MasyarakatController extends Controller
         ]);
 
         // Create a new Masyarakat record
-        User::create([
+        Masyarakat::create([
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama_lengkap,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -79,13 +79,16 @@ class MasyarakatController extends Controller
             'no_telepon' => $request->no_telepon,
             'alamat' => $request->alamat,
         ]);
+        
+        
 
         // Flash success message
         session()->flash('success', 'Masyarakat berhasil ditambahkan!');
 
 
-        return redirect('/masyarakat')->with('success', 'Data masyarakat berhasil ditambahkan.');
+        return redirect('masyarakat')->with('success', 'Data masyarakat berhasil ditambahkan.');
     }
+
 
    
 }

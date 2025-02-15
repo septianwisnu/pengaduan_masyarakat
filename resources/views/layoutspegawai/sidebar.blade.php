@@ -28,18 +28,19 @@
             <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
                 <li class="nav-header">Menu</li>
                 <li class="nav-item">
-                    <a href="/tampilandashboard" class="nav-link {{ request()->is('tampilanadmin') ? 'active' : '' }}">
+                    <a href="/tampilanadmin" class="nav-link {{ request()->is('tampilanadmin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                @unless(auth()->user()->role == 'petugas')
+                
                 <li class="nav-item">
-                    <a href="/masyarakat" class="nav-link {{ request()->is('masyarakat','masyarakat_add') ? 'active' : '' }}">
+                    <a href="/masyarakat" class="nav-link {{ request()->is('masyarakat') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Masyarakat</p>
                     </a>
                 </li>
+                
                 <li class="nav-item">
                     <a href="/pegawai" class="nav-link {{ request()->is('pegawai') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
@@ -52,7 +53,7 @@
                         <p>Kategori Pengaduan</p>
                     </a>
                 </li>
-                @endunless
+                
                 <li class="nav-header">Laporan</li>
                 <li class="nav-item">
                     <a href="/detail_pengaduan" class="nav-link {{ request()->is('laporanmasuk') ? 'active' : '' }}">
@@ -66,7 +67,7 @@
                         <p>Tanggapan</p>
                     </a>
                 </li>
-                @unless(auth()->user()->role == 'petugas')
+
                 <li class="nav-header">Export</li>
                 <li class="nav-item">
                     <a href="/generate" class="nav-link {{ request()->is('generate') ? 'active' : '' }}">
@@ -74,7 +75,6 @@
                         <p>Generate Laporan</p>
                     </a>
                 </li>
-                @endunless
             </ul>
         </nav>
     </div>

@@ -106,7 +106,7 @@ class PengaduanController extends Controller
         return view('dashboardadmin.laporanmasuk.tanggapan',compact('pengaduans'));
     }
     
-
+    //tanggapan dari admin
     public function updateTanggapan(Request $request, $id)
     {
         // Validasi input
@@ -132,6 +132,6 @@ class PengaduanController extends Controller
         $pengaduan->status = $request->status;
         $pengaduan->save();
 
-        return redirect('/tanggapan')->with('success', 'Tanggapan dan status pengaduan berhasil diperbarui.');
+        return redirect('/tampilandashboard')->with('success', 'Tanggapan dan status pengaduan berhasil diperbarui.');
     }
 }

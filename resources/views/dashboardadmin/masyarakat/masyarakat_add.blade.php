@@ -30,7 +30,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body p-5"> <!-- tambahkan padding 5 -->
-                        <form action="/store/dashboard_masyarakat" method="POST ">
+                        <form action="/store/masyarakat" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">

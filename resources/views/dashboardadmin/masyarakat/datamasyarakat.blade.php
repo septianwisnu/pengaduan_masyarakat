@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Masyarakat</h3>
-                            <a href="/masyarakat/add" class="btn float-right btn-outline-secondary btn-md">
+                            <a href="/masyarakat_add" class="btn float-right btn-outline-secondary btn-md">
                                 <li class="fa fa-plus"></li> Add Data Masyarakat
                             </a>
                        

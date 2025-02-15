@@ -1,4 +1,4 @@
-@extends('layoutsadmin.app')
+@extends('layoutspegawai.app')
 
 @section('main')
     <div class="content-wrapper">

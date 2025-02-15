@@ -41,9 +41,9 @@ class AuthController extends Controller
              $user = Auth::user();
              switch ($user->role) {
                  case 'admin':
-                     return redirect('/tampilanadmin');
+                     return redirect('/tampilandashboard');
                  case 'petugas':
-                     return redirect('/index');
+                     return redirect('/tampilandashboard');
                      case 'masyarakat':
                          {
                             return Auth::check() ? redirect('/dashboardmasyarakat') : view('welcome');

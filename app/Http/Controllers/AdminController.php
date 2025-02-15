@@ -14,6 +14,7 @@ class AdminController extends Controller
         $pengaduans = Pengaduan::all();
         return view('tampilanadmin',compact('pengaduans'));
     }
+    
 
     public function kategoriPengaduan()
     {

@@ -19,7 +19,7 @@ use App\Http\Controllers\MasyarakatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//dashboard sebelum login masyarakat
 Route::get('/', function () {
     return view('tampilanmasyarakat');
 });
@@ -42,7 +42,7 @@ Route::middleware(['auth', 'role:petugas,admin,masyarakat'])->group(function () 
 
 
     // Route untuk membuat Admin
-    Route::get('/tampilanadmin', [AdminController::class, 'index'])->name('dashboardadmin');
+    Route::get('/tampilandashboard', [AdminController::class, 'index'])->name('dashboardadmin');
     Route::get('/dashboardadmin/kategoripengaduan/kategori_add', [AdminController::class, 'kategoriPengaduan'])->name('dashboardadmin.kategoriPengaduan.kategori_add');
 
     Route::get('/detail_pengaduan', [PengaduanController::class, 'detailpengaduan'])->name('pengaduan.laporan');
@@ -56,8 +56,8 @@ Route::middleware(['auth', 'role:petugas,admin,masyarakat'])->group(function () 
     Route::get('/laporandetail', [AdminController::class, 'detailLaporan'])->name('admin.detailLaporan');
     Route::get('/masyarakat', [MasyarakatController::class, 'datamasyarakat'])->name('admin.datamasyarakat');;
     Route::get('/masyarakat/detail', [AdminController::class, 'detailMasyarakat'])->name('admin.detailMasyarakat');
-    Route::get('/masyarakat/add', [AdminController::class, 'addMasyarakat'])->name('admin.add_masyarakat');
-    Route::post('/store/dashboard_masyarakat', [MasyarakatController::class, 'store']);
+    Route::get('/masyarakat_add', [AdminController::class, 'addMasyarakat'])->name('admin.add_masyarakat');
+    Route::post('/store/masyarakat', [MasyarakatController::class, 'storemasyarakat']);
 
     Route::get('/pegawai', [PegawaiController::class, 'index'])->name('admin.pegawai');
     Route::get('/pegawai/detail', [AdminController::class, 'detailPegawai'])->name('admin.detailPegawai');
@@ -66,23 +66,23 @@ Route::middleware(['auth', 'role:petugas,admin,masyarakat'])->group(function () 
 
     Route::get('/generate', [AdminController::class, 'generate']);
 
-
+    //route tanggapan
     Route::get('/tanggapan', [PengaduanController::class, 'tanggapan']);
     Route::get('tambah_tanggapan/{id}',[PengaduanController::class,'createtanggapan']);
     Route::post('/update_tanggapan/{id}',[PengaduanController::class,'updateTanggapan']);
 
-
+    //route membuat pengaduan
     Route::get('/buat_pengaduan', [PengaduanController::class, 'create'])->name('buatpengaduan');
     Route::post('/store/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
     
     // Route untuk menampilkan tampilan dashboard pengaduan masyarakat
     Route::get('/dashboardmasyarakat', [PengaduanController::class, 'dashboardmasyarakat'])->name('dashboardmasyarakat.index');
     
-    
+
+    Route::get('/detaillaporan', [PegawaiController::class, 'detaillaporan'])->name('dashboardpegawai.detaillaporan');
+    Route::get('/laporan', [PegawaiController::class, 'laporan'])->name('dashboardpegawai.laporan');
+    Route::get('/tampilanpegawai', [PegawaiController::class, 'tampilanpegawai'])->name('dashboardpegawai.tampilanpegawai');
+    Route::get('/tanggapan', [PegawaiController::class, 'tanggapan'])->name('dashboardpegawai.tanggapan');
+   
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-
-// Route untuk membuat pengaduan
-
-
