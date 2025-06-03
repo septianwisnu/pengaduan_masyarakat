@@ -1,6 +1,6 @@
-@extends('layoutsmasyarakat.app')
+@extends('layoutsadmin.app')
 
-@section('content')
+@section('main')
     <div class="container mt-4 mb-3">
         <div class="row">
             <div class="col-lg-3">
@@ -15,12 +15,12 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
                             type="button" role="tab" aria-controls="profile" aria-selected="false">Ubah
-                            password</button>
+                            Password</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form action="{{ route('update.profile', ['id' => auth()->id()]) }}" method="POST">
+                        <form action="{{ route('updatePegawai.updatePegawai', ['id' => auth()->id()]) }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -69,19 +69,20 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form action="{{ route('update.password') }}" method="POST">
+                        <form action="{{ route('updatePassword.updatePassword', ['id' => auth()->id()]) }}) }}"
+                            method="POST">
                             @csrf
                             <div class="form-floating my-3">
                                 <input type="password" name="password" id="password" class="form-control" required>
-                                <label for="password">password Baru</label>
+                                <label for="password">Password Baru</label>
                             </div>
                             <div class="form-floating my-3">
-                                <input type="password" name="password_confirmation" id="password" class="form-control"
-                                    required>
-                                <label for="password">Konfirmasi password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control" required>
+                                <label for="password_confirmation">Konfirmasi Password</label>
                             </div>
                             <div class="form-floating my-3">
-                                <button type="submit" class="btn btn-primary btn-md">Perbaharui password</button>
+                                <button type="submit" class="btn btn-primary btn-md">Perbaharui Password</button>
                             </div>
                         </form>
                     </div>

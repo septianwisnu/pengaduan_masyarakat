@@ -10,44 +10,12 @@
   </ul>
 
   <!-- Right navbar links -->
- 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- Navbar lainnya bisa ditempatkan di sini -->
-        <ul class="navbar-nav ms-auto align-items-center">
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
+  <div class="navbar-nav ms-auto me-3">
+    @if(Auth::check() && (Auth::user()->role == 'admin' || Auth::user()->role == 'petugas'))
+      <span class="nav-link"><strong>{{ Auth::user()->nama_lengkap }} ({{ ucfirst(Auth::user()->role) }})</strong></span>
+     
+    @endif
+  </div>
 </nav>
 <!-- /.navbar -->
 
-<!-- SweetAlert2 Script -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  function confirmLogout() {
-    Swal.fire({
-      title: 'Apakah Anda yakin ingin logout?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Ya, Logout',
-      cancelButtonText: 'Batal',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        document.getElementById('logout-form').submit();
-      }
-    });
-  }
-</script>
-
-<!-- Logout Form -->
-<form id="logout-form" action="/logout" method="POST" style="display: none;">
-  @csrf
-</form>

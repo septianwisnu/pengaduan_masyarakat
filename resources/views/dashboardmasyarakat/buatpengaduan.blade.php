@@ -9,7 +9,9 @@
                         <h4>Buat Pengaduan</h4>
                     </div>
                     <div class="card-body card-body-pengaduan mt-4 ">
-                        <a href="{{ url()->previous() }}" class="btn btn-secondary btn-secondary-pengaduan mb-3">&larr; Kembali</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-warning btn-secondary-pengaduan mb-3">
+                            <i class="fas fa-sign-out-alt"></i> Kembali
+                        </a>                        
                         <form action="/store/pengaduan" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4">
@@ -59,7 +61,9 @@
                             </div>
 
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-pengaduan btn-save-pengaduan">Simpan Data Laporan</button>
+                                <button type="submit" class="btn btn-success btn-pengaduan btn-save-pengaduan">
+                                    Simpan Data Laporan
+                                </button>                                
                             </div>
                         </form>
                     </div>

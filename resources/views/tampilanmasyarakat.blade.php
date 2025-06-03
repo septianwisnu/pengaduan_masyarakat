@@ -91,41 +91,6 @@
 
     </section><!-- /About Section -->
 
-    <!-- Stats Section -->
-<section id="stats" class="stats section ">
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-    <div class="row gy-4 d-flex justify-content-center"> <!-- Pusatkan semua item -->
-      
-      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
-        <i class="fa-solid fa-user"></i>
-        <div class="stats-item text-center">
-          <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Masyarakat</p>
-        </div>
-      </div><!-- End Stats Item -->
-
-      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
-        <i class="fa-regular fa-file-alt"></i>
-        <div class="stats-item text-center">
-          <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Laporan</p>
-        </div>
-      </div><!-- End Stats Item -->
-
-      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
-        <i class="fa-solid fa-file-invoice"></i>
-        <div class="stats-item text-center">
-          <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
-          <p>Laporan Di Tanggapi</p>
-        </div>
-      </div><!-- End Stats Item -->
-
-    </div>
-
-  </div>
-</section><!-- /Stats Section -->
-
     <!-- Services Section -->
 <section id="services" class="services section">
 

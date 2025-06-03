@@ -3,17 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Kategori;
 use App\Models\Pengaduan;
+use App\Models\Tanggapan;
 use App\Models\Masyarakat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
     public function index()
-    {
-        $pengaduans = Pengaduan::all();
-        return view('tampilanadmin',compact('pengaduans'));
-    }
+{
+    $masyarakat = User::where('role', 'masyarakat')->count();
+    $kategori_pengaduan = Kategori::count();
+    $laporan_pengaduan = Pengaduan::count();
+    $laporan_baru = Pengaduan::where('status', 'baru')->count();
+    $pengaduans =Pengaduan::all();
+    return view('tampilanadmin', compact('masyarakat', 'kategori_pengaduan', 'laporan_pengaduan', 'laporan_baru','pengaduans'));
+}
+
     
 
     public function kategoriPengaduan()
@@ -42,10 +50,13 @@ class AdminController extends Controller
         return view('dashboardadmin.masyarakat.datamasyarakat');
     }
 
-    public function detailMasyarakat()
-    {
-        return view('dashboardadmin.masyarakat.detail');
+
+    // detail data masyarakat di admin
+    public function detailMasyarakat($id){
+        $users = User::findOrFail($id);
+        return view('dashboardadmin.masyarakat.detail',compact('users'));
     }
+    
 
     public function addMasyarakat()
     {
@@ -53,10 +64,10 @@ class AdminController extends Controller
     }
 
     
-
-    public function detailPegawai()
-    {
-        return view('dashboardadmin.pegawai.detailpegawai');
+     // detail data pegawai di admin
+     public function detailPegawai($id){
+        $users = User::findOrFail($id);
+        return view('dashboardadmin.pegawai.detailpegawai',compact('users'));
     }
 
     public function addPegawai()
@@ -112,4 +123,15 @@ class AdminController extends Controller
         return view('dashboardadmin.generate');
     }
 
+    public function datatanggapan($id)
+    {
+        $pengaduans = Pengaduan::findOrFail($id);
+
+        // Ambil tanggapan berdasarkan pengaduan_id yang sesuai
+        $tanggapans = Tanggapan::where('pengaduan_id', $id)->get();
+
+        return view('dashboardadmin.laporanmasuk.tanggapanadmin', compact('pengaduans', 'tanggapans'));
+
+
+}
 }

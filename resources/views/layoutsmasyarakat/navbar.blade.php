@@ -28,10 +28,11 @@
                         </li>
             
                         <li>
-                            <a href="{{ route('logout') }}" 
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin logout?')">
+                                @csrf
+                                <button type="submit" style="border: none; background: none; color: blue; cursor: pointer;">Logout</button>
+                            </form>
+                            
                         </li>
             
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

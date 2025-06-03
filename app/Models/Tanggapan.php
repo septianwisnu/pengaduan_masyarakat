@@ -18,5 +18,10 @@ class Tanggapan extends Model
         'petugas_id',
     ];
 
+    public function petugas()
+{
+    return $this->belongsTo(User::class, 'petugas_id'); // Sesuaikan dengan nama kolom
+}
+
     
 }

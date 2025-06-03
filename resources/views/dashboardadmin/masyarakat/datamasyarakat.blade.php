@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Masyarakat</h1>
+                        <h1> Masyarakat</h1>
                     </div>
                 </div>
             </div>
@@ -49,16 +49,23 @@
                                                 <td>{{ $user->nama_lengkap }}</td>
                                                 <td>{{ $user->alamat }}</td>
                                                 <td>
-                                                    <a href="/masyarakat/edit/{{ $user->id }}"
-                                                        class="btn btn-warning btn-sm">Edit</a>
-                                                    <form action="/masyarakat/delete/{{ $user->id }}" method="POST"
-                                                        class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                                    </form>
-                                                </td>
+                                                    <div class="d-flex gap-2">
+                                                        <!-- Tombol Lihat (Biru) -->
+                                                        <a href="/masyarakat_detail/{{ $user->id }}" class="btn btn-primary">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                
+                                                       
+                                                        <!-- Tombol Hapus (Merah) -->
+                                                        <form action="hapus_masyarakat/{{ $user->id }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>        
                                             </tr>
                                         @endforeach
                                     </tbody>

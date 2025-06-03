@@ -13,7 +13,7 @@ class Pengaduan extends Model
 
     protected $fillable = [
         'masyarakat_id',
-        'ketegori_id',
+        'kategori_id',
         'tanggal_pengaduan',
         'isi_pengaduan',
         'foto',
@@ -28,16 +28,19 @@ class Pengaduan extends Model
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
-    public function masyarakat(){
-        return $this->hasMany(User::class,'masyarakat_id');
+    public function masyarakat()
+    {
+        return $this->hasMany(User::class, 'masyarakat_id');
     }
     // Relasi ke model Tanggapan
     public function tanggapan()
     {
-        return $this->hasMany(Tanggapan::class);
+        return $this->hasOne(Tanggapan::class, 'pengaduan_id');
     }
-    
-    public function petugas(){
-        return $this->belongsTo(User::class,'masyarakat_id');
+
+
+    public function petugas()
+    {
+        return $this->belongsTo(User::class, 'masyarakat_id');
     }
 }
