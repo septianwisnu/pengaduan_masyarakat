@@ -1,58 +1,61 @@
-@extends('layoutsmasyarakat.app')
+@extends("layoutsmasyarakat.app")
+@section("content")
 
-@section('content')
-<main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <ol>
-                    <li><a href="#">Pengaduanku</a></li>
-                    <li>Detail</li>
-                </ol>
+<!-- Complaint Detail Section -->
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Section: Image -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <!-- Dynamic Image -->
+                    @if ($pengaduan->foto)
+                        <img src="{{ Storage::url($pengaduan->foto) }}" alt="Foto Pengaduan" class="img-fluid rounded shadow-sm" style="max-height: 400px; object-fit: cover;">
+                    @else
+                        <p class="text-muted">Tidak ada foto tersedia</p>
+                    @endif
+                </div>
             </div>
-
         </div>
-    </section><!-- End Breadcrumbs -->
 
-    <section id="portfolio-details" class="portfolio-details">
-        <div class="container">
+        <!-- Right Section: Details -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Detail Pengaduan</h5>
+                    <hr>
 
-            <div class="row gy-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Kategori:</strong> {{ $pengaduan->kategori ? $pengaduan->kategori->nama_kategori : 'N/A' }}</li>
+                        <li class="list-group-item"><strong>Tanggal Pengaduan:</strong> {{ \Carbon\Carbon::parse($pengaduan->tanggalpengaduan)->format('d M, Y') }}</li>
+                        <li class="list-group-item">
+                            <strong>Status Pengaduan:</strong> 
+                            <span class="badge 
+                                @if($pengaduan->status == 'Pending') bg-warning 
+                                @elseif($pengaduan->status == 'Diproses') bg-primary 
+                                @elseif($pengaduan->status == 'Selesai') bg-success 
+                                @else bg-secondary 
+                                @endif">
+                                {{ $pengaduan->status }}
+                            </span>
+                        </li>
+                    </ul>
 
-                <div class="col-lg-8">
-                    <div class="portfolio-details-slider swiper">
-                        <div class="swiper-wrapper align-items-center">
-                                <img src="assetsuser/img/portfolio/portfolio-1.jpg" alt="">
-                        </div>
+                    <div class="mt-3">
+                        <h6>Deskripsi:</h6>
+                        <p class="text-muted">{{ $pengaduan->isi_pengaduan }}</p>
+                    </div>
+
+                    <!-- Button Kembali -->
+                    <div class="text-center mt-4">
+                        <a href="/dashboardmasyarakat" class="btn btn-warning">
+                            <i class="fas fa-arrow-left"></i> Kembali
+                        </a>
                     </div>
                 </div>
-
-                <div class="col-lg-4">
-                    <div class="portfolio-info">
-                        <h3>Limbah Pabrik ABCD</h3>
-                        <ul>
-                            <li><strong>Category</strong>: Pencemaran</li>
-                            <li><strong>Tanggal Pengaduan</strong>: 01 March, 2020</li>
-                            <li><strong>Status Pengaduan</strong>: <small class="inf inf-process">Process</small></li>
-                        </ul>
-                    </div>
-                    <div class="portfolio-description">
-                        <p>
-                            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi
-                            labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque
-                            itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur
-                            dignissimos. Sequi nulla at esse enim cum deserunt eius.
-                        </p>
-                    </div>
-                    <a href="user-pengaduanku.html" class="btn btn-warning btn-md">Kembali</a>
-                </div>
-
             </div>
-
         </div>
-    </section>
+    </div>
+</div>
 
-</main><!-- End #main -->
 @endsection

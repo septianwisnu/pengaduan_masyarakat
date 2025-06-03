@@ -1,127 +1,88 @@
- @extends('layoutsadmin.app')
- @section('main')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Generate Report</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Generate Report</a></li>
-                        <li class="breadcrumb-item active">Index</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+@extends('layoutsadmin.app')
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <div class="container">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Laporan Periode
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form form-group">
-                                <label for="selectBulan">
-                                    Pilih Bulan
-                                </label>
-                                <select name="selectBulan" id="selectBulan" class="form form-control">
-                                    <option value="">-- Pilih Bulan --</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Februari">Februari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April">April</option>
-                                    <option value="Mei">Mei</option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
-                                    <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
-                                    <option value="November">November</option>
-                                    <option value="Desember">Desember</option>
-                                </select>
-                            </div>
-                            <div class="form form-group">
-                                <label for="selectTahun">Pilih Tahun</label>
-                                <select name="selectTahun" id="selectTahun" class="form form-control">
-                                    <option value="">-- Pilih Tahun --</option>
-                                    <option value="">2022</option>
-                                    <option value="">2023</option>
-                                </select>
-                            </div>
-                            <div class="form form-group">
-                                <label for="selectStatus">Pilih Status</label>
-                                <select name="selectStatus" id="selectStatus" class="form form-control">
-                                    <option value="">ALL</option>
-                                    <option value="">Process</option>
-                                    <option value="">Selesai</option>
-                                </select>
-                            </div>
-                            <div class="form form-group">
-                                <a href="generate-report-periode.html" class="btn btn-primary btn-lg"><li class="fa fa-print"></li> Cetak </a>
-                            </div>
-                        </div>
+@section('main')
+    <div class="content-wrapper">
+
+        @if (session('error'))
+            <script>
+                window.onload = function() {
+                    alert("{{ session('error') }}");
+                };
+            </script>
+        @endif
+
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Print Laporan</h1>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="container">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                Laporan Rekap Periode
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Print Laporan</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('generatereport.print') }}" method="POST" target="_blank">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <label for="tahun">Pilih Tahun</label>
+                                        <select class="form-control" id="tahun" name="tahun">
+                                            <option value="">Pilih Tahun</option>
+                                            @for ($i = date('Y'); $i >= 2020; $i--)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="bulan">Pilih Bulan</label>
+                                        <select class="form-control" id="bulan" name="bulan">
+                                            <option value="">Pilih Bulan</option>
+                                            <option value="1">Januari</option>
+                                            <option value="2">Februari</option>
+                                            <option value="3">Maret</option>
+                                            <option value="4">April</option>
+                                            <option value="5">Mei</option>
+                                            <option value="6">Juni</option>
+                                            <option value="7">Juli</option>
+                                            <option value="8">Agustus</option>
+                                            <option value="9">September</option>
+                                            <option value="10">Oktober</option>
+                                            <option value="11">November</option>
+                                            <option value="12">Desember</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="status">Pilih Status</label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option value="">Pilih Status</option>
+                                            <option value="Ditunda">ditunda</option>
+                                            <option value="Ditolak">Ditolak</option>
+                                            <option value="Diproses">Diproses</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-print"></i> Print Laporan
+                                    </button>
+                                </form>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form form-group">
-                                <label for="selectBulan">
-                                    Pilih Bulan
-                                </label>
-                                <select name="selectBulan" id="selectBulan" class="form form-control">
-                                    <option value="">-- Pilih Bulan --</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Februari">Februari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April">April</option>
-                                    <option value="Mei">Mei</option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
-                                    <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
-                                    <option value="November">November</option>
-                                    <option value="Desember">Desember</option>
-                                </select>
-                            </div>
-                            <div class="form form-group">
-                                <label for="selectTahun">Pilih Tahun</label>
-                                <select name="selectTahun" id="selectTahun" class="form form-control">
-                                    <option value="">-- Pilih Tahun --</option>
-                                    <option value="">2022</option>
-                                    <option value="">2023</option>
-                                </select>
-                            </div>
-                            <div class="form form-group">
-                                <a href="generate-report-rekap.html" class="btn btn-primary btn-lg"><li class="fa fa-print"></li> Cetak </a>
-                            </div>
-                        </div>
+                        <!-- /.card -->
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /.row -->
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+        </section>
+    </div>
 @endsection

@@ -11,6 +11,7 @@ class Masyarakat extends Model
 
     protected $table = 'users';
 
+
     protected $fillable = [
         'nik',
         'nama_lengkap',

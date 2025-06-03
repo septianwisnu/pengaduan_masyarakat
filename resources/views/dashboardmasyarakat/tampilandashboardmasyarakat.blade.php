@@ -23,9 +23,9 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>No</th>
-
-                                        <th>Kategori Pengaduan</th>
                                         <th>Tanggal Pengaduan</th>
+                                        <th>Kategori Pengaduan</th>
+                                        <th>Nama Pengadu</th>
                                         <th>Isi Laporan</th>
                                         <th>Foto</th>
                                         <th>Status</th>
@@ -35,60 +35,66 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($pengaduans as $index => $pengaduan)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $pengaduan->kategori->nama_kategori ?? 'Tidak Ada Data' }}</td>
-                                            <td>{{ $pengaduan->tanggal_pengaduan }}</td>
-                                            <td>{{ $pengaduan->isi_pengaduan }}</td>
-                                            <td>
-                                                @if ($pengaduan->foto)
-                                                    <img src="{{ Storage::url($pengaduan->foto) }}" alt="Foto Pengaduan"
-                                                        width="100">
-                                                @else
-                                                    Tidak ada foto
-                                                @endif
-                                            </td>
+                                        @if ($pengaduan->user_id ?? auth()->id())
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $pengaduan->tanggal_pengaduan }}</td>
+                                                <td>{{ $pengaduan->kategori->nama_kategori ?? 'Tidak Ada Data' }}</td>
+                                                <td>{{ $pengaduan->petugas->nama_lengkap }}</td>
+                                                <td>{{ $pengaduan->isi_pengaduan }}</td>
+                                                
+                                                <td>
+                                                    @if ($pengaduan->foto)
+                                                        <img src="{{ Storage::url($pengaduan->foto) }}" alt="Foto Pengaduan"
+                                                            width="100">
+                                                    @else
+                                                        Tidak ada foto
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="/tanggapandari_admin/{{ $pengaduan->id }}">
+                                                        <span class="badge 
+                                                            {{ $pengaduan->status == 'selesai' ? 'bg-success' : 
+                                                               ($pengaduan->status == 'diproses' ? 'bg-info' : 
+                                                               ($pengaduan->status == 'ditolak' ? 'bg-danger' : 
+                                                               ($pengaduan->status == 'ditunda' ? 'bg-secondary' : 'bg-warning'))) }}">
+                                                            {{ ucfirst($pengaduan->status) }}
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                
+                                                
+                                                
+                                                <td style="display: flex; gap: 5px; align-items: center;">
+                                                    <a href="/detail_masyarakat/{{ $pengaduan->id }}"
+                                                        class="btn btn-sm btn-warning">
+                                                        <i class="fas fa-info-circle"></i> Detail
+                                                    </a>
+                                                    <form action="{{ route('destroy_pengaduan', $pengaduan->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Yakin ingin menghapus pengaduan ini?')">
+                                                            <i class="fas fa-trash"></i> Hapus
+                                                        </button>
+                                                    </form>
 
-
-                                            <td>
-                                                <a href="/tanggapandariadmin/{{ $pengaduan->id }}">
-                                                    <span
-                                                        class="badge
-                                                @if ($pengaduan->status == '0') bg-warning
-                                                @elseif($pengaduan->status == 'diproses') bg-info
-                                                @elseif($pengaduan->status == 'selesai') bg-success
-                                                @elseif($pengaduan->status == 'ditolak') bg-danger
-                                                @else bg-secondary @endif">
-                                                        {{ ucfirst($pengaduan->status) }}
-                                                    </span>
-                                                </a>
-                                            </td>
-                                            <td style="display: flex; gap: 5px; align-items: center;">
-                                                <a href="/edit_pengaduan/{{ $pengaduan->id }}" class="btn btn-sm btn-warning">
-                                                    <i class="fas fa-info-circle"></i> Detail
-                                                </a>
-                                                <form action="" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Yakin ingin menghapus pengaduan ini?')">
-                                                        <i class="fas fa-trash"></i> Hapus
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
 
                                 </tbody>
                             </table>
-                            
-                            </div>
 
                         </div>
+
                     </div>
-                    <!-- /.card-body -->
                 </div>
+                <!-- /.card-body -->
             </div>
+        </div>
         </div>
     </body>
 @endsection

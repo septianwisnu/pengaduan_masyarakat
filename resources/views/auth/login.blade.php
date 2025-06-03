@@ -11,6 +11,32 @@
 
 </head>
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    });
+</script>
+
 <body>
     <div class="login-container">
         <img src="{{ asset('assets/img/logo_kota_banjar.png') }}" alt="logo">
@@ -52,6 +78,8 @@
             <p>Belum punya akun? <a href="{{ route('register') }}">Buat sekarang</a></p>
         </div>
     </div>
+
+
 </body>
 
 </html>
@@ -154,3 +182,5 @@
         }
     }
 </style>
+
+

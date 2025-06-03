@@ -10,12 +10,6 @@
                         <div class="col-sm-6">
                             <h1>Pegawai</h1>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Kategori</a></li>
-                                <li class="breadcrumb-item active">Index</li>
-                            </ol>
-                        </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -27,9 +21,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Kategori</h3>
-                                <a href="kategori-add.html" class="btn float-right btn-outline-secondary btn-md">
-                                    <li class="fa fa-plus"></li> Add Data Kategori
-                                </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

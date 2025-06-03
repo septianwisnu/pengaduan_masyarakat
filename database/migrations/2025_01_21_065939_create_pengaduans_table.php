@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_pengaduan');
             $table->text('isi_pengaduan');
             $table->string('foto')->nullable(); 
-            $table->enum('status', ['0', 'diproses', 'selesai'])->nullable();
+            $table->enum('status', ['new','ditolak','ditunda', 'diproses', 'selesai'])->nullable();
             $table->timestamps();
         });
     }

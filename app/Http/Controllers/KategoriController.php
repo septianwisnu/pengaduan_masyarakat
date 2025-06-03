@@ -33,29 +33,43 @@ class KategoriController extends Controller
 
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $kategori = Kategori::findOrFail($id);
-        return view('admin.kategori.edit_kategori',compact('kategori'));
+        return view('dashboardadmin.kategoripengaduan.editkategori', compact('kategori'));
     }
+    
 
     public function update(Request $request, $id)
+{
+    // Validasi data input
+    $request->validate([
+        'nama_kategori'  => 'required',
+        'deskripsi'      => 'required',
+    ]);
+
+    // Cari kategori berdasarkan ID
+    $kategori = Kategori::findOrFail($id);
+
+    // Update kategori
+    $kategori->nama_kategori = $request->nama_kategori;
+    $kategori->deskripsi = $request->deskripsi;
+    $kategori->save();
+
+    // Redirect kembali ke halaman kategori dengan pesan sukses
+    return redirect('/kategori')->with('success', 'Kategori berhasil diperbarui');
+}
+
+    
+
+      public function destroy($id)
     {
-        $request->validate([
-            'nama_kategori'  => 'required',
-            'deskripsi'      => 'required',
-        ]);
-
-        // Cari kategori berdasarkan id
         $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
 
-        // Update data kategori
-        $kategori->update([
-            'nama_kategori' => $request->nama_kategori,
-            'deskripsi'     => $request->deskripsi,
-        ]);
-
-        return redirect('kategori')->with('success', 'Kategori berhasil diperbarui');
+        return redirect('kategori')->with('success', 'Kategori berhasil dihapus');
     }
+
 
 
 }

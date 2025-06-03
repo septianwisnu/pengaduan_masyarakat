@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Pengaduan;
@@ -8,6 +9,7 @@ use App\Models\Tanggapan;
 use App\Models\Pengaduans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
 {
@@ -16,16 +18,16 @@ class PengaduanController extends Controller
     {
         $petugas    = User::all();
         $pengaduans = Pengaduan::with('masyarakat', 'kategori')->latest()->get();
-        return view('dashboardmasyarakat.buatpengaduan', compact('petugas','pengaduans'));
+        return view('dashboardmasyarakat.buatpengaduan', compact('petugas', 'pengaduans'));
     }
 
     public function create()
-     {
+    {
 
         $masyarakats = User::all();
-         $kategories = Kategori::all(); // Pastikan Kategori memiliki data
-         return view('dashboardmasyarakat.buatpengaduan',compact('masyarakats','kategories'));
-     }
+        $kategories = Kategori::all(); // Pastikan Kategori memiliki data
+        return view('dashboardmasyarakat.buatpengaduan', compact('masyarakats', 'kategories'));
+    }
 
     // Menyimpan pengaduan yang dibuat oleh masyarakat
     public function store(Request $request)
@@ -37,7 +39,7 @@ class PengaduanController extends Controller
             'tanggal_pengaduan' => 'required|date',
             'isi_pengaduan' => 'required|string',
             'foto' => 'nullable|mimes:jpeg,png,jpg|max:2048', // Tidak wajib, hanya jika ada input file
-            'status' => 'nullable|in:pending,proses,selesai',
+            'status' => 'nullable|in:ditolak,ditunda,proses,selesai',
         ], [
             'masyarakat_id.exists' => 'Nama masyarakat harus ada di tabel user.',
             'kategori_id.required' => 'Kategori harus diisi.',
@@ -71,48 +73,54 @@ class PengaduanController extends Controller
         $pengaduan->tanggal_pengaduan = $request->tanggal_pengaduan;
         $pengaduan->isi_pengaduan = $request->isi_pengaduan;
         $pengaduan->foto = $data['foto'] ?? null; // Pastikan foto tersimpan dengan benar
-        $pengaduan->status = '0'; // Status default
+        $pengaduan->status = 'new'; // Status default
         $pengaduan->save();
 
-        return redirect('dashboard_masyarakat')->with('success', 'Data Berhasil Dibuat');
-
+        return redirect('dashboardmasyarakat')->with('success', 'Data Berhasil Dibuat');
     }
 
     // Menampilkan halaman dashboard masyarakat
     public function dashboardmasyarakat()
     {
-        $pengaduans = Pengaduan::paginate(10); // Ambil data pengaduan dengan pagination
+        $user = auth()->user(); // Ambil user yang login
+        $pengaduans = Pengaduan::where('masyarakat_id', $user->id)->paginate(10); // Hanya data user yang login
+
         return view('dashboardmasyarakat.tampilandashboardmasyarakat', compact('pengaduans'));
     }
-    
-    public function data(){
+
+
+    public function data()
+    {
         $pengaduans = Pengaduan::paginate(10); // Tambahkan pagination
-        return view('tampilanadmin',compact('pengaduans'));
+        return view('tampilanadmin', compact('pengaduans'));
     }
 
 
-    public function detailpengaduan(){
+    public function detailpengaduan($id)
+    {
         $kategoris = Kategori::all();
-        $pengaduans = Pengaduan::all(); 
-        return view('dashboardadmin.laporanmasuk.laporan',compact('kategoris','pengaduans'));
+        $pengaduans = Pengaduan::findOrFail($id);
+        return view('dashboardadmin.laporanmasuk.detaillaporan', compact('kategoris', 'pengaduans'));
     }
 
-    public function tanggapan(){
+    public function tanggapan()
+    {
         $tanggapans = Tanggapan::all();
-        return view('dashboardadmin.laporanmasuk.data_tanggapan',compact('tanggapans'));
+        return view('dashboardadmin.laporanmasuk.data_tanggapan', compact('tanggapans'));
     }
-    public function createtanggapan($id){
-        $pengaduans =Pengaduan::findOrFail($id);
-        return view('dashboardadmin.laporanmasuk.tanggapan',compact('pengaduans'));
+    public function createtanggapan($id)
+    {
+        $pengaduans = Pengaduan::findOrFail($id);
+        return view('dashboardadmin.laporanmasuk.tanggapan', compact('pengaduans'));
     }
-    
 
+    //tanggapan dari admin
     public function updateTanggapan(Request $request, $id)
     {
         // Validasi input
         $request->validate([
             'isi_tanggapan' => 'required|string',
-            'status' => 'required|in:ditolak,0,diproses,selesai',
+            'status' => 'required|in:ditolak,ditunda,diproses,selesai',
         ]);
 
         // Cari pengaduan berdasarkan ID
@@ -132,6 +140,52 @@ class PengaduanController extends Controller
         $pengaduan->status = $request->status;
         $pengaduan->save();
 
-        return redirect('/tanggapan')->with('success', 'Tanggapan dan status pengaduan berhasil diperbarui.');
+        return redirect('/tampilandashboard')->with('success', 'Tanggapan dan status pengaduan berhasil diperbarui.');
+    }
+
+
+    public function destroy($id)
+    {
+        // Mencari pengaduan berdasarkan ID
+        $pengaduan = Pengaduan::findOrFail($id);
+
+        // Hapus foto jika ada
+        if ($pengaduan->foto) {
+            // Menghapus file foto dari storage
+            Storage::delete($pengaduan->foto);
+        }
+
+        // Hapus pengaduan
+        $pengaduan->delete();
+
+        // Redirect ke halaman daftar pengaduan dengan pesan sukses
+        return redirect('dashboardmasyarakat')->with('success', 'Pengaduan berhasil dihapus');
+    }
+
+
+
+
+
+
+    // detail laporan
+    public function detail_laporan(Request $request)
+    {
+        // Query dasar untuk mengambil data pengaduan
+        $query = Pengaduan::query();
+
+        // Filter berdasarkan bulan dan tahun jika ada
+        if ($request->has('bulan') && $request->has('tahun')) {
+            $bulan = $request->bulan;
+            $tahun = $request->tahun;
+
+            $query->whereYear('tanggal_pengaduan', $tahun)
+                ->whereMonth('tanggal_pengaduan', $bulan);
+        }
+
+        // Ambil data pengaduan setelah filter
+        $pengaduans = $query->get();
+
+        // Kirim data ke view
+        return view('dashboardadmin.laporanmasuk.laporan', compact('pengaduans'));
     }
 }
